@@ -3,6 +3,11 @@ function computerPlay() {
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
+function updateScores(playerScore, computerScore) {
+  document.getElementById('player-score').innerText = playerScore;
+  document.getElementById('computer-score').innerText = computerScore;
+}
+
 function showResults(results) {
   const container = document.querySelector('.results-container');
   const content = document.createElement('div');
@@ -13,10 +18,10 @@ function showResults(results) {
 
 function determineWinner() {
   if (playerScore === 5) {
-    showResults('You win!');
+    alert('You win!');
     
   } else if (computerScore === 5) {
-    showResults('You lose!');
+    alert('You lose!');
   }
 }
 
@@ -43,14 +48,15 @@ function playRound(e) {
     results ? playerScore++ : computerScore++;
     showResults(`Winner: ${results}`);
   }
-  showResults(`${playerScore} ${computerScore}`);
   if (playerScore === 5 || computerScore === 5) {
     determineWinner();
     reset();
   }
+  updateScores(playerScore, computerScore);
 }
 
 let playerScore = 0;
 let computerScore = 0;
+updateScores(playerScore, computerScore);
 const buttons = document.querySelectorAll('button');
 buttons.forEach(btn => btn.addEventListener('click', playRound));
