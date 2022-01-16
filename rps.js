@@ -16,6 +16,22 @@ function showResults(results) {
   container.appendChild(content);
 }
 
+function determineRound(playerChoice, computerChoice) {
+  const beats = {
+    'scissors': 'rock',
+    'rock': 'paper',
+    'paper': 'scissors'
+  }
+
+  if (playerChoice === computerChoice) {
+    showResults('Tie!');
+  } else {
+    results = playerChoice === beats[computerChoice];
+    results ? playerScore++ : computerScore++;
+    showResults(`Winner: ${results}`);
+  }
+}
+
 function determineWinner() {
   if (playerScore === 5) {
     alert('You win!');
@@ -33,21 +49,10 @@ function reset() {
 }
 
 function playRound(e) {
-  computerChoice = computerPlay();
-  const beats = {
-    'scissors': 'rock',
-    'rock': 'paper',
-    'paper': 'scissors'
-  }
-
   let playerChoice = e.target.className.replace('-btn', '')
-  if (playerChoice === computerChoice) {
-    showResults('Tie!');
-  } else {
-    results = playerChoice === beats[computerChoice];
-    results ? playerScore++ : computerScore++;
-    showResults(`Winner: ${results}`);
-  }
+  let computerChoice = computerPlay();
+  determineRound(playerChoice, computerChoice);
+  
   if (playerScore === 5 || computerScore === 5) {
     determineWinner();
     reset();
