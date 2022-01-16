@@ -50,8 +50,7 @@ function reset() {
   playerScore = 0;
   computerScore = 0;
   updateScores(playerScore, computerScore);
-  choices = document.querySelector('.choice-container');
-  choices.textContent = '';
+  showChoices('', '');
   results = document.querySelector('.results-container');
   results.textContent = '';
 }
