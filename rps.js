@@ -3,6 +3,11 @@ function computerPlay() {
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
+function showChoices(playerChoice, computerChoice) {
+  document.getElementById('player-choice').innerText = playerChoice;
+  document.getElementById('computer-choice').innerText = computerChoice;
+}
+
 function showResults(results) {
   const container = document.querySelector('.results-container');
   const content = document.createElement('div');
@@ -44,20 +49,24 @@ function determineWinner() {
 function reset() {
   playerScore = 0;
   computerScore = 0;
-  container = document.querySelector('.results-container');
-  container.textContent = '';
+  updateScores(playerScore, computerScore);
+  choices = document.querySelector('.choice-container');
+  choices.textContent = '';
+  results = document.querySelector('.results-container');
+  results.textContent = '';
 }
 
 function playRound(e) {
-  let playerChoice = e.target.className.replace('-btn', '')
+  let playerChoice = e.target.className.replace('-btn', '');
   let computerChoice = computerPlay();
+  showChoices(playerChoice, computerChoice);
   determineRound(playerChoice, computerChoice);
-  
+  updateScores(playerScore, computerScore);
+
   if (playerScore === 5 || computerScore === 5) {
     determineWinner();
     reset();
   }
-  updateScores(playerScore, computerScore);
 }
 
 let playerScore = 0;
