@@ -3,11 +3,6 @@ function computerPlay() {
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
-function updateScores(playerScore, computerScore) {
-  document.getElementById('player-score').innerText = playerScore;
-  document.getElementById('computer-score').innerText = computerScore;
-}
-
 function showResults(results) {
   const container = document.querySelector('.results-container');
   const content = document.createElement('div');
@@ -30,6 +25,11 @@ function determineRound(playerChoice, computerChoice) {
     results ? playerScore++ : computerScore++;
     showResults(`Winner: ${results}`);
   }
+}
+
+function updateScores(playerScore, computerScore) {
+  document.getElementById('player-score').innerText = playerScore;
+  document.getElementById('computer-score').innerText = computerScore;
 }
 
 function determineWinner() {
