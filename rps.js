@@ -40,10 +40,14 @@ function updateScores(playerScore, computerScore) {
 function determineWinner() {
   if (playerScore === 5) {
     alert('You win!');
-    
   } else if (computerScore === 5) {
     alert('You lose!');
   }
+}
+
+function clearResults() {
+  results = document.querySelector('.results-container');
+  results.textContent = '';
 }
 
 function reset() {
@@ -51,11 +55,12 @@ function reset() {
   computerScore = 0;
   updateScores(playerScore, computerScore);
   showChoices('', '');
-  results = document.querySelector('.results-container');
-  results.textContent = '';
+  clearResults();
 }
 
 function playRound(e) {
+  clearResults();
+
   let playerChoice = e.target.className.replace('-btn', '');
   let computerChoice = computerPlay();
   showChoices(playerChoice, computerChoice);
