@@ -39,9 +39,9 @@ function updateScores(playerScore, computerScore) {
 
 function determineWinner() {
   if (playerScore === 5) {
-    alert('You win!');
+    showResults('You win the game!');
   } else if (computerScore === 5) {
-    alert('You lose!');
+    showResults('You lose the game!');
   }
 }
 
