@@ -36,7 +36,7 @@ function determineRound(playerChoice, computerChoice) {
   }
 }
 
-function updateScores(playerScore, computerScore) {
+function updateScores() {
   document.getElementById('player-score').innerText = playerScore;
   document.getElementById('computer-score').innerText = computerScore;
 }
@@ -57,7 +57,7 @@ function clearResults() {
 function reset() {
   playerScore = 0;
   computerScore = 0;
-  updateScores(playerScore, computerScore);
+  updateScores();
   showChoices('', '');
   document.getElementById('round').innerText = '';
   clearResults();
@@ -87,7 +87,7 @@ function playRound(e) {
   let computerChoice = computerPlay();
   showChoices(playerChoice, computerChoice);
   determineRound(playerChoice, computerChoice);
-  updateScores(playerScore, computerScore);
+  updateScores();
 
   if (playerScore === 5 || computerScore === 5) {
     determineWinner();
@@ -100,6 +100,6 @@ function playRound(e) {
 let playerScore = 0;
 let computerScore = 0;
 let round = 1;
-updateScores(playerScore, computerScore);
+updateScores();
 const buttons = document.querySelectorAll('button');
 buttons.forEach(btn => btn.addEventListener('click', playRound));
