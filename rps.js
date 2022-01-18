@@ -42,9 +42,9 @@ function updateScores(playerScore, computerScore) {
 }
 
 function determineWinner() {
-  if (playerScore === 1) {
+  if (playerScore === 5) {
     showResults('You win the game!');
-  } else if (computerScore === 1) {
+  } else if (computerScore === 5) {
     showResults('You lose the game!');
   }
 }
@@ -87,7 +87,7 @@ function playRound(e) {
   determineRound(playerChoice, computerChoice);
   updateScores(playerScore, computerScore);
 
-  if (playerScore === 1 || computerScore === 1) {
+  if (playerScore === 5 || computerScore === 5) {
     determineWinner();
     showPlayAgain();
     interactRpsButtons();
