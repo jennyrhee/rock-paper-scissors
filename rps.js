@@ -82,7 +82,7 @@ function playRound(e) {
   clearResults();
 
   let playerChoice = e.target.className.replace('-btn', '').toUpperCase();
-  let computerChoice = computerPlay().toUpperCase();
+  let computerChoice = computerPlay();
   showChoices(playerChoice, computerChoice);
   determineRound(playerChoice, computerChoice);
   updateScores(playerScore, computerScore);
