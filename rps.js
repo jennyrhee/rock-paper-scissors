@@ -106,6 +106,5 @@ function playRound(e) {
 let playerScore = 0;
 let computerScore = 0;
 let round = 1;
-updateScores();
 const buttons = document.querySelectorAll('button');
 buttons.forEach(btn => btn.addEventListener('click', playRound));
