@@ -27,6 +27,15 @@ button {
   height: 100px;
 }
 
+.play-again-btn {
+  max-width: 130px;
+  max-height: 40px;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
 .choice-container {
   display: flex;
   align-items: center;

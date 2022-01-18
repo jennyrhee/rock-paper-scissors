@@ -38,9 +38,9 @@ function updateScores(playerScore, computerScore) {
 }
 
 function determineWinner() {
-  if (playerScore === 5) {
+  if (playerScore === 1) {
     showResults('You win the game!');
-  } else if (computerScore === 5) {
+  } else if (computerScore === 1) {
     showResults('You lose the game!');
   }
 }
@@ -58,6 +58,20 @@ function reset() {
   clearResults();
 }
 
+function showPlayAgain() {
+  const container = document.querySelector('.results-container');
+  const btn = document.createElement('button');
+  btn.classList.add('play-again-btn');
+  btn.textContent = 'PLAY AGAIN';
+  btn.addEventListener('click', reset);
+  container.appendChild(btn);
+}
+
+function disableRpsButtons() {
+  const container = document.querySelector('.button-container');
+  container.classList.add('disabled');
+}
+
 function playRound(e) {
   clearResults();
 
@@ -67,9 +81,10 @@ function playRound(e) {
   determineRound(playerChoice, computerChoice);
   updateScores(playerScore, computerScore);
 
-  if (playerScore === 5 || computerScore === 5) {
+  if (playerScore === 1 || computerScore === 1) {
     determineWinner();
-    reset();
+    showPlayAgain();
+    disableRpsButtons();
   }
 }
 
