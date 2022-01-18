@@ -9,8 +9,13 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: 100px;
   margin: 50px;
+}
+
+.card {
+  width: 100px;
+  height: 50px;
 }
 
 .button-container {
@@ -30,15 +35,13 @@ button {
 .play-again-btn {
   max-width: 130px;
   max-height: 40px;
+  margin: 20px;
 }
 
 .disabled {
   pointer-events: none;
 }
 
-.choice-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 50px;
+.results-container {
+  margin: 20px;
 }
