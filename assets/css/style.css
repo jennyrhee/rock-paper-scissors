@@ -46,6 +46,10 @@ button {
   margin: 20px;
 }
 
-.results {
-  padding: 10px;
+.results-win {
+  color: #336600;
+}
+
+.results-lose {
+  color: #cc0000;
 }

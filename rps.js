@@ -11,7 +11,13 @@ function showChoices(playerChoice, computerChoice) {
 function showResults(results) {
   const container = document.querySelector('.results-container');
   const content = document.createElement('div');
-  content.classList.add('results');
+  if (results === 'Tie!') {
+    content.classList.add('results');
+  } else if (results.search('win') > 0) {
+    content.classList.add('results-win');
+  } else {
+    content.classList.add('results-lose');
+  }
   content.textContent = results;
   container.appendChild(content);
 }
@@ -81,7 +87,6 @@ function interactRpsButtons(disable=true) {
 }
 
 function playRound(e) {
-  clearResults();
   document.getElementById('round').innerText = `Round: ${round}`;
 
   let playerChoice = e.target.className.replace('-btn', '').toUpperCase();
