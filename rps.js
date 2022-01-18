@@ -59,6 +59,7 @@ function reset() {
   computerScore = 0;
   updateScores();
   showChoices('', '');
+  round = 1;
   document.getElementById('round').innerText = '';
   clearResults();
   interactRpsButtons(disable=false);
