@@ -45,3 +45,7 @@ button {
 .results-container {
   margin: 20px;
 }
+
+.results {
+  padding: 10px;
+}
