@@ -26,9 +26,13 @@ function determineRound(playerChoice, computerChoice) {
   if (playerChoice === computerChoice) {
     showResults('Tie!');
   } else {
-    results = playerChoice === beats[computerChoice];
-    results ? playerScore++ : computerScore++;
-    showResults(`Winner: ${results}`);
+    isWinner = playerChoice === beats[computerChoice];
+    isWinner ? playerScore++ : computerScore++;
+    if (isWinner) {
+      showResults(`${playerChoice} beats ${computerChoice}! You win this round.`);
+    } else {
+      showResults(`${playerChoice} loses to ${computerChoice}. You lose this round.`);
+    }
   }
 }
 
