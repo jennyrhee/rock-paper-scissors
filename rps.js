@@ -56,6 +56,7 @@ function reset() {
   updateScores(playerScore, computerScore);
   showChoices('', '');
   clearResults();
+  interactRpsButtons(disable=false);
 }
 
 function showPlayAgain() {
@@ -67,9 +68,10 @@ function showPlayAgain() {
   container.appendChild(btn);
 }
 
-function disableRpsButtons() {
+function interactRpsButtons(disable=true) {
   const container = document.querySelector('.button-container');
-  container.classList.add('disabled');
+  disable ? container.classList.add('disabled') :
+    container.classList.remove('disabled');
 }
 
 function playRound(e) {
@@ -84,7 +86,7 @@ function playRound(e) {
   if (playerScore === 1 || computerScore === 1) {
     determineWinner();
     showPlayAgain();
-    disableRpsButtons();
+    interactRpsButtons();
   }
 }
 
