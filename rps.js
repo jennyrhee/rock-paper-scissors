@@ -1,66 +1,101 @@
-const choices = ['rock', 'paper', 'scissors'];
-
 function computerPlay() {
+  const choices = ['ROCK', 'PAPER', 'SCISSORS'];
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
-function getPlayerChoice() {
-  let playerChoice = prompt('Rock, paper, or scissors?');
-  // to make user input case insensitive
-  playerChoice = playerChoice.toLowerCase();
-
-  while (!choices.includes(playerChoice)) {
-    playerChoice = prompt('Unexpected input. Try again.');
-  }
-  return playerChoice;
+function showChoices(playerChoice, computerChoice) {
+  document.getElementById('player-choice').innerText = playerChoice;
+  document.getElementById('computer-choice').innerText = computerChoice;
 }
 
-function playRound(playerChoice, computerChoice) {
-  switch (playerChoice) {
-    case 'rock':
-      switch (computerChoice) {
-        case 'scissors': return 1;
-        case 'paper': return -1;
-        default: return 0;
-      }
-    case 'paper':
-      switch (computerChoice) {
-        case 'rock': return 1;
-        case 'scissors': return -1;
-        default: return 0;
-      }
-    case 'scissors':
-      switch (computerChoice) {
-        case 'paper': return 1;
-        case 'rock': return -1;
-        default: return 0;
-      }
-  }
+function showResults(results) {
+  const container = document.querySelector('.results-container');
+  const content = document.createElement('div');
+  content.classList.add('results');
+  content.textContent = results;
+  container.appendChild(content);
 }
 
-function game() {
-  let score = 0;
-  let roundScore = 0;
+function determineRound(playerChoice, computerChoice) {
+  const beats = {
+    'SCISSORS': 'ROCK',
+    'ROCK': 'PAPER',
+    'PAPER': 'SCISSORS'
+  }
 
-  for (let i = 0; i < 5; i++) {
-    playerChoice = getPlayerChoice();
-    computerChoice = computerPlay();
-    roundScore = playRound(playerChoice, computerChoice);
-    score += roundScore;
-    if (roundScore === 1) {
-        console.log(`You win! ${playerChoice} beats ${computerChoice}.`);
-    } else if (roundScore === -1) {
-        console.log(`You lose! ${computerChoice} beats ${playerChoice}.`);
+  if (playerChoice === computerChoice) {
+    showResults('Tie!');
+  } else {
+    isWinner = playerChoice === beats[computerChoice];
+    isWinner ? playerScore++ : computerScore++;
+    if (isWinner) {
+      showResults(`${playerChoice} beats ${computerChoice}! You win this round.`);
     } else {
-        console.log(`It's a tie.`);
+      showResults(`${playerChoice} loses to ${computerChoice}. You lose this round.`);
     }
   }
+}
 
-  if (score > 0) {
-    console.log(`You win the game! Your final score was ${score}.`);
-  } else if (score < 0) {
-    console.log(`You lose the game! Your final score was ${score}.`);
-  } else {
-    console.log(`It's a tie game.`)
+function updateScores(playerScore, computerScore) {
+  document.getElementById('player-score').innerText = playerScore;
+  document.getElementById('computer-score').innerText = computerScore;
+}
+
+function determineWinner() {
+  if (playerScore === 5) {
+    showResults('You win the game!');
+  } else if (computerScore === 5) {
+    showResults('You lose the game!');
   }
 }
+
+function clearResults() {
+  results = document.querySelector('.results-container');
+  results.textContent = '';
+}
+
+function reset() {
+  playerScore = 0;
+  computerScore = 0;
+  updateScores(playerScore, computerScore);
+  showChoices('', '');
+  clearResults();
+  interactRpsButtons(disable=false);
+}
+
+function showPlayAgain() {
+  const container = document.querySelector('.results-container');
+  const btn = document.createElement('button');
+  btn.classList.add('play-again-btn');
+  btn.textContent = 'PLAY AGAIN';
+  btn.addEventListener('click', reset);
+  container.appendChild(btn);
+}
+
+function interactRpsButtons(disable=true) {
+  const container = document.querySelector('.button-container');
+  disable ? container.classList.add('disabled') :
+    container.classList.remove('disabled');
+}
+
+function playRound(e) {
+  clearResults();
+
+  let playerChoice = e.target.className.replace('-btn', '').toUpperCase();
+  let computerChoice = computerPlay().toUpperCase();
+  showChoices(playerChoice, computerChoice);
+  determineRound(playerChoice, computerChoice);
+  updateScores(playerScore, computerScore);
+
+  if (playerScore === 5 || computerScore === 5) {
+    determineWinner();
+    showPlayAgain();
+    interactRpsButtons();
+  }
+}
+
+let playerScore = 0;
+let computerScore = 0;
+updateScores(playerScore, computerScore);
+const buttons = document.querySelectorAll('button');
+buttons.forEach(btn => btn.addEventListener('click', playRound));
