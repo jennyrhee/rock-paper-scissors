@@ -59,6 +59,7 @@ function reset() {
   computerScore = 0;
   updateScores(playerScore, computerScore);
   showChoices('', '');
+  document.getElementById('round').innerText = '';
   clearResults();
   interactRpsButtons(disable=false);
 }
@@ -80,6 +81,7 @@ function interactRpsButtons(disable=true) {
 
 function playRound(e) {
   clearResults();
+  document.getElementById('round').innerText = `Round: ${round}`;
 
   let playerChoice = e.target.className.replace('-btn', '').toUpperCase();
   let computerChoice = computerPlay();
@@ -92,10 +94,12 @@ function playRound(e) {
     showPlayAgain();
     interactRpsButtons();
   }
+  round++;
 }
 
 let playerScore = 0;
 let computerScore = 0;
+let round = 1;
 updateScores(playerScore, computerScore);
 const buttons = document.querySelectorAll('button');
 buttons.forEach(btn => btn.addEventListener('click', playRound));
