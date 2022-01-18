@@ -1,5 +1,5 @@
 function computerPlay() {
-  const choices = ['rock', 'paper', 'scissors'];
+  const choices = ['ROCK', 'PAPER', 'SCISSORS'];
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
@@ -18,9 +18,9 @@ function showResults(results) {
 
 function determineRound(playerChoice, computerChoice) {
   const beats = {
-    'scissors': 'rock',
-    'rock': 'paper',
-    'paper': 'scissors'
+    'SCISSORS': 'ROCK',
+    'ROCK': 'PAPER',
+    'PAPER': 'SCISSORS'
   }
 
   if (playerChoice === computerChoice) {
@@ -77,8 +77,8 @@ function interactRpsButtons(disable=true) {
 function playRound(e) {
   clearResults();
 
-  let playerChoice = e.target.className.replace('-btn', '');
-  let computerChoice = computerPlay();
+  let playerChoice = e.target.className.replace('-btn', '').toUpperCase();
+  let computerChoice = computerPlay().toUpperCase();
   showChoices(playerChoice, computerChoice);
   determineRound(playerChoice, computerChoice);
   updateScores(playerScore, computerScore);
